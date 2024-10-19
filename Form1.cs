@@ -122,7 +122,15 @@ namespace Tic_Tac_Toe
 
         private void panel_Click(object sender, EventArgs e)
         {
-
+            if (MessageBox.Show("Вы уверены?", "Подтвердите действие", MessageBoxButtons.YesNo, 
+                MessageBoxIcon.Information,MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                playerXWins = 0;
+                playerOWins = 0;
+                
+                label2.Text = $"X: {playerXWins}";
+                label3.Text = $"O: {playerOWins}";
+            }
         }
 
         private void panel_MouseDown(object sender, MouseEventArgs e)
