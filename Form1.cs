@@ -13,6 +13,7 @@ namespace Tic_Tac_Toe
         int[] gameBoard = new int[9];
         int playerXWins = 0;
         int playerOWins = 0;
+        bool isDraw = false;
 
         private void textBox_Click(object sender, EventArgs e)
         {
@@ -82,6 +83,14 @@ namespace Tic_Tac_Toe
                 return;
             }
 
+            // Ничья
+            if (gameBoard.All(cell => cell != 0))
+            {
+                isDraw = true;
+                ResetGame();
+                return;
+            }
+
         }
         private void ResetGame()
         {
@@ -93,9 +102,22 @@ namespace Tic_Tac_Toe
             {
                 textBox.Text = "";
             }
+
             // Отображаем счет игроков
             label2.Text = $"X: {playerXWins}";
             label3.Text = $"O: {playerOWins}";
+            if (isDraw)
+            {
+                MessageBox.Show("Ничья!");
+                isDraw = false;
+            }
+            else
+            {
+                MessageBox.Show($"Победил игрок {(player ? "O" : "X")}!");
+            }
+
+            // Переключаем ход на следующего игрока
+            player = !player;
         }
 
         private void panel_Click(object sender, EventArgs e)
